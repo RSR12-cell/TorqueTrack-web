@@ -2,3 +2,13 @@ body{
     margin: 0px;
     background-color: hsl(0, 0%, 25%);
 }
+
+#root{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+#application_body{
+    flex: 1;
+}

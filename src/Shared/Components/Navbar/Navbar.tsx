@@ -19,8 +19,6 @@ export default function Navbar() : React.JSX.Element{
             <span className={styles.user_name}>Ryan's Workshop</span>
           </div>
         </div>
-
-        <hr />
         </>
     )
 }

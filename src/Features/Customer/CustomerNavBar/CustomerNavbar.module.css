@@ -1,0 +1,28 @@
+.customer_navBar{
+    color: hsl(178, 70%, 48%);
+    list-style: none;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    border-right: 3px solid hsl(0, 0%, 45%);
+    padding: 15px;
+    margin-top: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+.customer_navBar li{
+    font-size: 1.3rem;
+    margin-right: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: underline;
+    padding: 5px;
+}
+
+.customer_navBar li:hover{
+    border: 3px dashed hsl(178, 70%, 48%);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    cursor: pointer;
+}
