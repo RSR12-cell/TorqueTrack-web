@@ -6,23 +6,34 @@
     flex-direction: column;
     gap: 35px;
     border-right: 3px solid hsl(0, 0%, 45%);
-    padding: 15px;
+    padding-left: 0px;
+    padding-right: 15px;
     margin-top: 0px;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .customer_navBar li{
     font-size: 1.3rem;
     margin-right: 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-decoration: underline;
-    padding: 5px;
+    padding: 15px;
+    border-width: 3px;
+    border-style: dashed;
+    border-color: transparent;
 }
 
 .customer_navBar li:hover{
-    border: 3px dashed hsl(178, 70%, 48%);
+    border-color: hsl(178, 70%, 48%);
+    background-color: hsl(0, 0%, 25%);
+    border-left-width: 0px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+    color:hsl(167, 85%, 41%);
     cursor: pointer;
+}
+
+.customer_navBar li:active{
+    color: rgb(4, 83, 148);
+    border-style: solid
 }
