@@ -1,3 +1,4 @@
+import createCustomer from '../service/CreateCustomer_function';
 import type { Customer } from '../Type/Customer';
 import styles from './CustomerCreation.module.css'
 import React, { useState } from 'react'
@@ -6,19 +7,43 @@ export default function CustomerCreationForm(){
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [status, setStatus] = useState<"Created" | "Sending" | "" | "Ok" | "Request_Error" | "Internal server error">("")
 
     const formSubmit = (e : React.SubmitEvent) =>{
-        e.preventDefault();
+       
+        e.preventDefault();      
 
+        if(firstName.length <= 0 || lastName.length <= 0 || phoneNumber.length !== 10){
+            setStatus("")
+            return 
+        }
+        
+
+        for (let index = 0; index < phoneNumber.length; index++) {
+            const element = phoneNumber.charAt(index);
+
+            if(!(element >= '0' && element <= '9')){
+                setStatus("")
+                return
+            }
+            
+        }
+        
         let newClient: Customer = {
             id: null,
-            first_name: firstName,
-            last_name: lastName,
-            phone_number: phoneNumber
-        }
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber
+        } 
 
-        console.log(newClient);
-        
+        try{
+            const result = createCustomer(newClient);
+            
+            console.log(result.then(c => console.log(c)));
+            
+        }catch(error){
+            console.error(error)
+        }
     }
 
     return (
