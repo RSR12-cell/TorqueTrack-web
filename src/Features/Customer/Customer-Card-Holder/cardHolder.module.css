@@ -1,0 +1,13 @@
+
+.customer_card{
+    display: flex;
+    flex-direction: column;
+    border-radius: 35px;
+    width: 145px;
+    height: 145px;
+    background-color: hsl(240, 70%, 12%);
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+}

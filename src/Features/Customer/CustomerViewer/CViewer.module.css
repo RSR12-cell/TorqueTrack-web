@@ -1,0 +1,10 @@
+.viewer{
+    flex: 1;
+    background-color: transparent;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 200px;
+    overflow-y: auto;
+}
+
