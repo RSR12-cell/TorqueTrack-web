@@ -10,7 +10,7 @@ function App(): React.JSX.Element{
     return(
         <>
         <Navbar></Navbar>
-        <div style={{display: "flex", flexDirection: "row", gap: "15px", height: "100%", width: "100%"}} id="application_body">
+        <div style={{display: "flex", flexDirection: "row", gap: "30px"}} id="application_body">
             <CustomerNavBar/>
             {/* <CustomerCreationForm></CustomerCreationForm> */}
             <CViewer></CViewer>

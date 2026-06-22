@@ -1,5 +1,5 @@
 
-export type Customer = {
+export interface Customer {
     id: string | null,
     firstName: string,
     lastName: string,

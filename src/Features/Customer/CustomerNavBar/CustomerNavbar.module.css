@@ -1,5 +1,6 @@
 .customer_navBar{
-    color: hsl(178, 70%, 48%);
+    color: white;
+    padding: 50px;
     list-style: none;
     width: fit-content;
     display: flex;
@@ -21,19 +22,21 @@
     border-width: 3px;
     border-style: dashed;
     border-color: transparent;
+    
 }
 
 .customer_navBar li:hover{
-    border-color: hsl(178, 70%, 48%);
+    border-color: hsl(9, 100%, 50%);
     background-color: hsl(0, 0%, 25%);
     border-left-width: 0px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    color:hsl(167, 85%, 41%);
+    color: hsl(9, 100%, 50%);
     cursor: pointer;
 }
 
 .customer_navBar li:active{
-    color: rgb(4, 83, 148);
+    color: #229971;
+    border-color: #229971;
     border-style: solid
 }
