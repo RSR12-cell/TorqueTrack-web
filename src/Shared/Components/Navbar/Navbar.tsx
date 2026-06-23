@@ -1,9 +1,14 @@
 import styles from './Navbar.module.css'
 import myLogo from '../../../assets/Ford_Mustang.jpg'
 import myProfilePic from '../../../assets/teeth in the vortex.png'
+import { useSearchedContext } from './SearchContext/UseSearchContext'
+
 
 export default function Navbar() : React.JSX.Element{
-    return(
+  
+  const {setSearch} = useSearchedContext()
+
+  return(
         <>
         <div className= {styles.navBar_container}>
           <div className={styles.navbar_logo}>
@@ -11,7 +16,7 @@ export default function Navbar() : React.JSX.Element{
           </div>
 
           <div className={styles.navbar_searchBar}>
-            <input type="text" placeholder='Enter Details to Search' />
+            <input type="text" placeholder='Enter Details to Search' onChange={i => setSearch(i.target.value)}/>
           </div>
 
           <div className={styles.navbar_account_info}>
