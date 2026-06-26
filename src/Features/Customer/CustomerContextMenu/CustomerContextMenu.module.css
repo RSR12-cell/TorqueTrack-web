@@ -1,0 +1,14 @@
+
+.customer_contextMenu{
+    width: auto;
+    height: auto;
+    background-color: red;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    text-align: center;
+}

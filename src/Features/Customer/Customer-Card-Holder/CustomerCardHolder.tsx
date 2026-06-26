@@ -1,13 +1,15 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Customer } from "../Type/Customer";
 import styles from './cardHolder.module.css';
 import deleteCustomer from "../service/DeleteCustomer_function";
 
 interface CustomerCardHolderProp extends Customer {
     removeCustomerFromList: (customerId: string) => void;
+    handleOnMouseEnter: () => void;
+    handleOnMouseExit: () => void;
 }
 
-export default function CustomerCardHolder({id, firstName, lastName, phoneNumber, removeCustomerFromList}: CustomerCardHolderProp){
+export default function CustomerCardHolder({customerId, firstName, lastName, phoneNumber, removeCustomerFromList, handleOnMouseEnter, handleOnMouseExit}: CustomerCardHolderProp){
     
     const container = useRef<HTMLDivElement>(null);
 
@@ -17,12 +19,11 @@ export default function CustomerCardHolder({id, firstName, lastName, phoneNumber
 
     const handleOnKeyPressed = (event: React.KeyboardEvent<HTMLDivElement>) =>{
         if(event.key === "Delete"){
-            console.log("Delete was pressed");
             
-            if(id !== null){
+            if(customerId !== null){
                 try {
-                    deleteCustomer(id)
-                    .then(() => {removeCustomerFromList(id);})                
+                    deleteCustomer(customerId)
+                    .then(() => {removeCustomerFromList(customerId);})                
                 } catch (error) {
                     console.error(error)
                 }
@@ -30,7 +31,9 @@ export default function CustomerCardHolder({id, firstName, lastName, phoneNumber
         }
     }
     return(
-        <div ref={container} onClick={handleOnCLick} className={styles.customer_card} onKeyDown={handleOnKeyPressed} tabIndex={-1}>
+        <div ref={container}
+         onClick={handleOnCLick} className={styles.customer_card} onKeyDown={handleOnKeyPressed} 
+         tabIndex={-1} onMouseEnter={ handleOnMouseEnter} onMouseLeave={handleOnMouseExit}>
             <label>{firstName}</label>
             <label>{lastName}</label>
             <label>{phoneNumber}</label>
