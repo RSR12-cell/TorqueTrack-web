@@ -1,14 +1,28 @@
-
 .customer_contextMenu{
-    width: auto;
-    height: auto;
-    background-color: red;
     position: absolute;
+    background-color: red;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    align-items: center;
-    justify-content: center;
-    list-style-type: none;
-    text-align: center;
+    align-items: flex-start;
+    padding: 5px;
+    gap: 5px;
+    background-color: hsl(0, 1%, 14%);
+}
+
+.customer_contextMenu button{
+    width: 100%;
+    background-color:transparent;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.customer_contextMenu button:hover{
+    background-color: hsl(0, 2%, 25%)
+}
+
+.customer_contextMenu button:active{
+    background-color: hsl(0, 2%, 35%);
+    color: #229971;
 }

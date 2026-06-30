@@ -7,7 +7,7 @@ export default function CustomerCreationForm(){
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [status, setStatus] = useState<"Created" | "Sending" | "" | "Ok" | "Request_Error" | "Internal server error">("")
+const [status, setStatus] = useState<"Created" | "Sending" | "" | "Ok" | "Request_Error" | "Internal server error">("")
 
     const formSubmit = (e : React.SubmitEvent) =>{
        
@@ -30,7 +30,7 @@ export default function CustomerCreationForm(){
         }
         
         let newClient: Customer = {
-            id: null,
+            customerId: null,
             firstName: firstName,
             lastName: lastName,
             phoneNumber: phoneNumber

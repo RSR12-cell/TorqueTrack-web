@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import getAllCustomers from "../service/GetCustomers";
 import { useSearchedContext } from "../../../Shared/Components/Navbar/SearchContext/UseSearchContext";
 import CustomerContextMenu from "../CustomerContextMenu/CustomerContextMenu";
+import CustomerUpdaterForm from "../CustomerUpdaterForm/CustomerUpdaterForm";
 
 
 interface MenuPosition{
@@ -17,13 +18,16 @@ export default function CViewer() :React.JSX.Element{
 
     const {search} = useSearchedContext()
     const [menuPosition, setMenuPosition] = useState<MenuPosition | null>()
-    const [customerCard, setCustomerCard] = useState<Customer | null>(null)
+    const [toggleUF, setToggleUF] = useState<boolean>(false)
+
+    const [prevCustomerCard, setPrevCustomerCard] = useState<Customer | null>(null)//I am going to use this to identify when a 
+    const [prevCustomer, setPrevCustomer] = useState<Customer | null>()
 
     const [customers, setCustomers] = useState<Customer[]>([]) //I am going to use this filter the data and display it
     const [lstCustomer, setLstCustomer] = useState<Customer[]>([])
 
     const handleOnContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if(customerCard !== null){
+        if(prevCustomerCard !== null){
             e.preventDefault();
             setMenuPosition({x: e.clientX, y: e.clientY})            
         }
@@ -65,29 +69,43 @@ export default function CViewer() :React.JSX.Element{
 
 
     return(
-        <>
-                <div className= {styles.viewer} onContextMenu={handleOnContextMenu}>
+         <div className= {styles.viewer} onContextMenu={handleOnContextMenu}>
             {
                 customers.filter(c => c.customerId !== null).map((c, ind) => (
                   <CustomerCardHolder 
                         key={`${c.customerId}: ${ind}`}
                         removeCustomerFromList={deleteCustomer}
-                        handleOnMouseEnter={() => setCustomerCard(c)}
-                        handleOnMouseExit={() => setCustomerCard(null)}
+                        handleOnFocus={() => { setPrevCustomer(c); } }
                         customerId={c.customerId}
-                        firstName={c.firstName} 
-                        lastName={c.lastName} 
-                        phoneNumber={c.phoneNumber}
+                        firstName={c.firstName}
+                        lastName={c.lastName}
+                        phoneNumber={c.phoneNumber} 
+                        handleOnMouseEnter={() => setPrevCustomerCard(c)} 
+                        handleOnMouseExit={() => setPrevCustomerCard(null)}                        
                         />
-                        
                 ))
             }
-        </div>
-
-        {menuPosition && (
-                <CustomerContextMenu x={menuPosition.x} y={menuPosition.y}></CustomerContextMenu>
+            
+        {menuPosition && prevCustomer &&(
+                <CustomerContextMenu position={{
+                        x: menuPosition.x,
+                        y: menuPosition.y
+                    }
+                
+                } 
+                
+                customer={prevCustomer} handleOnDeleteClick={() => deleteCustomer(prevCustomer.customerId!)} 
+                handleOnUpdateClick={() => {
+                    setMenuPosition(null)
+                    setToggleUF(true);
+                }}
+                ></CustomerContextMenu>
             )}
-        </>
+
+           {prevCustomer && <CustomerUpdaterForm customer={prevCustomer!} handleToggle={() => setToggleUF(false)} />}
+
+            
+        </div>
 
     )
 }

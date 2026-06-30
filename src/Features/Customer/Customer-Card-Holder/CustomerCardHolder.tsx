@@ -5,11 +5,12 @@ import deleteCustomer from "../service/DeleteCustomer_function";
 
 interface CustomerCardHolderProp extends Customer {
     removeCustomerFromList: (customerId: string) => void;
+    handleOnFocus: () => void;
     handleOnMouseEnter: () => void;
     handleOnMouseExit: () => void;
 }
 
-export default function CustomerCardHolder({customerId, firstName, lastName, phoneNumber, removeCustomerFromList, handleOnMouseEnter, handleOnMouseExit}: CustomerCardHolderProp){
+export default function CustomerCardHolder({customerId, firstName, lastName, phoneNumber, removeCustomerFromList,handleOnFocus, handleOnMouseEnter, handleOnMouseExit}: CustomerCardHolderProp){
     
     const container = useRef<HTMLDivElement>(null);
 
@@ -33,7 +34,7 @@ export default function CustomerCardHolder({customerId, firstName, lastName, pho
     return(
         <div ref={container}
          onClick={handleOnCLick} className={styles.customer_card} onKeyDown={handleOnKeyPressed} 
-         tabIndex={-1} onMouseEnter={ handleOnMouseEnter} onMouseLeave={handleOnMouseExit}>
+         tabIndex={-1} onFocus={handleOnFocus} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseExit}>
             <label>{firstName}</label>
             <label>{lastName}</label>
             <label>{phoneNumber}</label>
