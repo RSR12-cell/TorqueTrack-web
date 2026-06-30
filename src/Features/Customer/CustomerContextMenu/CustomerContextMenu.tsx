@@ -16,7 +16,7 @@ export default function CustomerContextMenu({position, customer, handleOnDeleteC
 
     return (
         <menu  className={styles.customer_contextMenu} style={{ top: `${position.y}px`,left: `${position.x + 5}px`}}>
-            <button onClick={_ => handleOnUpdateClick}>Update Customer</button>
+            <button onClick={_ => handleOnUpdateClick()}>Update Customer</button>
             <button onClick={() => {
                 try {               
                     deleteCustomer(customer.customerId!)

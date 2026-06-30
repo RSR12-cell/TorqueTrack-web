@@ -1,6 +1,7 @@
 import React, { useState, type SetStateAction } from 'react';
 import type { Customer } from '../Type/Customer';
 import styles from './CustomerUpdaterForm.module.css'
+import UpdateCustomer from '../service/UpdateCustomer_function';
 
 interface CustomerUpdaterFormProps{
     customer: Customer,
@@ -21,15 +22,31 @@ export default function CustomerUpdaterForm({handleToggle, customer}: CustomerUp
     const formSubmit = (e : React.SubmitEvent) =>{
         e.preventDefault(); 
         
-        console.log(`First name: ${firstName}\nLast name: ${lastName}\nPhone number: ${phoneNumber}`);
-        
+        try{
+            const updatedCustomer = UpdateCustomer({
+                customerId: customer.customerId,
+                firstName: firstName,
+                lastName:  lastName,
+                phoneNumber: phoneNumber
+            })
+
+            updatedCustomer.then(_ => console.log("CLient was Updated"));        
+        }catch(error){
+            console.error(error);
+        }     
     }
 
-     return (
-            <form className={styles.creation_form} onSubmit={formSubmit}>
-                <div style={{display: "flex", flexDirection: "row", gap: "5px", justifyContent: "center", alignItems: "center"}}>
-                    <h1 style={{textAlign: "center", flex: "1"}}>Fueling up the client list</h1>
+    const handleOnClose = () =>{        
+        handleToggle(false)
+    }
 
+    
+
+     return (
+            <form className={styles.creation_form} onSubmit={formSubmit} onClick={i => i}>
+                <div style={{display: "flex",padding: "5px", flexDirection: "row", gap: "5px", justifyContent: "center", alignItems: "center"}}>
+                    <h1 style={{textAlign: "center", flex: "1"}}>Fueling up the client list</h1>
+                    <button className={styles.btnClose} onClick={() => handleOnClose()}>X</button>
                 </div>
                     <div className={styles.field_container}>
                         <label >Client's first name: </label>

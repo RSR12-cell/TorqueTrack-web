@@ -66,10 +66,16 @@ export default function CViewer() :React.JSX.Element{
         setCustomers(prev => prev.filter(c => c.customerId !== customerID))
     }
 
+    const handleOnClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>{
+        if(event.target === event.currentTarget){
+            setToggleUF(false)
+        }
+    }
 
+    
 
     return(
-         <div className= {styles.viewer} onContextMenu={handleOnContextMenu}>
+         <div className= {styles.viewer} onContextMenu={handleOnContextMenu} onClick={handleOnClick}>
             {
                 customers.filter(c => c.customerId !== null).map((c, ind) => (
                   <CustomerCardHolder 
@@ -102,7 +108,7 @@ export default function CViewer() :React.JSX.Element{
                 ></CustomerContextMenu>
             )}
 
-           {prevCustomer && <CustomerUpdaterForm customer={prevCustomer!} handleToggle={() => setToggleUF(false)} />}
+           { toggleUF === true && <CustomerUpdaterForm customer={prevCustomer!} handleToggle={() => setToggleUF(false)} />}
 
             
         </div>
