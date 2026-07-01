@@ -2,6 +2,7 @@ import React, { useState, type SetStateAction } from 'react';
 import type { Customer } from '../Type/Customer';
 import styles from './CustomerUpdaterForm.module.css'
 import UpdateCustomer from '../service/UpdateCustomer_function';
+import customerMap from '../CustomerMap/CustomerMap';
 
 interface CustomerUpdaterFormProps{
     customer: Customer,
@@ -30,7 +31,19 @@ export default function CustomerUpdaterForm({handleToggle, customer}: CustomerUp
                 phoneNumber: phoneNumber
             })
 
-            updatedCustomer.then(_ => console.log("CLient was Updated"));        
+            const updateCard = (c: Customer) => {
+                if(c.customerId !== null){
+                    const updatableFunctions = customerMap.get(c.customerId);
+
+                    if(updatableFunctions !== undefined){
+                      updatableFunctions.setFirstName(c.firstName)
+                      updatableFunctions.setLastName(c.lastName)
+                      updatableFunctions.setPhoneNumber(c.phoneNumber)
+                    }
+                }
+            }
+
+            updatedCustomer.then(updateCard);        
         }catch(error){
             console.error(error);
         }     

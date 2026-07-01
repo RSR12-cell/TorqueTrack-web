@@ -7,6 +7,7 @@ import getAllCustomers from "../service/GetCustomers";
 import { useSearchedContext } from "../../../Shared/Components/Navbar/SearchContext/UseSearchContext";
 import CustomerContextMenu from "../CustomerContextMenu/CustomerContextMenu";
 import CustomerUpdaterForm from "../CustomerUpdaterForm/CustomerUpdaterForm";
+import customerMap from "../CustomerMap/CustomerMap";
 
 
 interface MenuPosition{
@@ -64,6 +65,10 @@ export default function CViewer() :React.JSX.Element{
     const deleteCustomer = (customerID: string) => {
         setLstCustomer(prev => prev.filter(c => c.customerId !== customerID))
         setCustomers(prev => prev.filter(c => c.customerId !== customerID))
+        
+        if(customerID !== null){
+            customerMap.delete(customerID);
+        }
     }
 
     const handleOnClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) =>{

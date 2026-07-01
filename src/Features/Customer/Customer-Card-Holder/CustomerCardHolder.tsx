@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import type { Customer } from "../Type/Customer";
 import styles from './cardHolder.module.css';
 import deleteCustomer from "../service/DeleteCustomer_function";
+import customerMap from "../CustomerMap/CustomerMap";
 
 interface CustomerCardHolderProp extends Customer {
     removeCustomerFromList: (customerId: string) => void;
@@ -13,9 +14,20 @@ interface CustomerCardHolderProp extends Customer {
 export default function CustomerCardHolder({customerId, firstName, lastName, phoneNumber, removeCustomerFromList,handleOnFocus, handleOnMouseEnter, handleOnMouseExit}: CustomerCardHolderProp){
     
     const container = useRef<HTMLDivElement>(null);
+    const [settableFirstName, setFirstName] = useState(firstName);
+    const [settableLastName, setLastName] = useState(lastName);
+    const [settablePhoneNumber, setPhoneNumber] = useState(phoneNumber);
 
     const handleOnCLick = () =>{
         container.current?.focus()
+    }
+
+    if(customerId !== null){
+        customerMap.set(customerId, {
+            setFirstName: setFirstName,
+            setLastName: setLastName,
+            setPhoneNumber: setPhoneNumber
+        })
     }
 
     const handleOnKeyPressed = (event: React.KeyboardEvent<HTMLDivElement>) =>{
@@ -35,9 +47,9 @@ export default function CustomerCardHolder({customerId, firstName, lastName, pho
         <div ref={container}
          onClick={handleOnCLick} className={styles.customer_card} onKeyDown={handleOnKeyPressed} 
          tabIndex={-1} onFocus={handleOnFocus} onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseExit}>
-            <label>{firstName}</label>
-            <label>{lastName}</label>
-            <label>{phoneNumber}</label>
+            <label>{settableFirstName}</label>
+            <label>{settableLastName}</label>
+            <label>{settablePhoneNumber}</label>
         </div>
     )
 }
