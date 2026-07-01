@@ -6,13 +6,11 @@ import customerMap from '../CustomerMap/CustomerMap';
 
 interface CustomerUpdaterFormProps{
     customer: Customer,
-    // handleOnFirstNameChange: React.SetStateAction<String>,
-    // handleOnLastNameChanged: React.SetStateAction<String>,
-    // handleOnPhoneNumberChanged: React.SetStateAction<String>
+    handleUpdate: (c: Customer) => void;
     handleToggle: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function CustomerUpdaterForm({handleToggle, customer}: CustomerUpdaterFormProps){
+export default function CustomerUpdaterForm({handleToggle, customer, handleUpdate}: CustomerUpdaterFormProps){
 
     const [firstName, setFirstName] = useState(customer.firstName);
     const [lastName, setLastName] = useState(customer.lastName);
@@ -39,6 +37,7 @@ export default function CustomerUpdaterForm({handleToggle, customer}: CustomerUp
                       updatableFunctions.setFirstName(c.firstName)
                       updatableFunctions.setLastName(c.lastName)
                       updatableFunctions.setPhoneNumber(c.phoneNumber)
+                      handleUpdate(c)
                     }
                 }
             }

@@ -34,7 +34,13 @@ export default function CViewer() :React.JSX.Element{
         }
     }
     
-    
+    const handleUpdate = (c: Customer) => {
+        for(let i: number = 0; i < lstCustomer.length; i++){
+            if(c.customerId === lstCustomer[i].customerId){
+                lstCustomer[i] = c;
+            }
+        }
+    }
 
     useEffect(() => {
        getAllCustomers()
@@ -113,7 +119,7 @@ export default function CViewer() :React.JSX.Element{
                 ></CustomerContextMenu>
             )}
 
-           { toggleUF === true && <CustomerUpdaterForm customer={prevCustomer!} handleToggle={() => setToggleUF(false)} />}
+           { toggleUF === true && <CustomerUpdaterForm customer={prevCustomer!} handleUpdate={handleUpdate} handleToggle={() => setToggleUF(false)} />}
 
             
         </div>
